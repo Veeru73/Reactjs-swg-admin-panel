@@ -142,7 +142,7 @@ export default function RoleFullDetails({ setLoading }) {
 
     return (
         <>
-            <div className='RoleAdminstrator mt-3'>
+            <div className='RoleAdministrator mt-3'>
                 <Container fluid>
                     <Row>
                         <Col md={12}>

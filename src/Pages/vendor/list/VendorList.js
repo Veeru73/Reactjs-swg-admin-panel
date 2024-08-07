@@ -62,7 +62,7 @@ export const VendorList = () => {
     return (
         <>
             <Loader show={loading} />
-            <div className='RoleAdminstrator'>
+            <div className='RoleAdministrator'>
                 <Container fluid>
                     <Row>
                         <Col md={3}>

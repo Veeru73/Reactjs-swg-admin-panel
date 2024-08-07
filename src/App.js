@@ -17,6 +17,9 @@ import { CreateRole } from './Pages/role_module/CreateRole';
 import { RoleListDetail } from "./Pages/role_module/RoleListDetail"
 import { TimeCardList } from './Pages/time_card/list/TimeCardList';
 import { TimeCardDetail } from './Pages/time_card/edit/TimeCardDetail';
+import { JobList } from './Pages/Job/list/JobList';
+import { CreateJob } from './Pages/Job/add/CreateJob';
+import { EditJob } from './Pages/Job/edit/EditJob';
 
 function App() {
 
@@ -38,6 +41,9 @@ function App() {
           <Route path="/employeelist" element={<EmployeeList />} />
           <Route path="/createemployee" element={<CreateEmployee />} />
           <Route path="/editemployee" element={<EditEmployee />} />
+          <Route path="/joblist" element={<JobList />} />
+          <Route path="/createjob" element={<CreateJob />} />
+          <Route path="/editjob" element={<EditJob />} />
           <Route path="/timecard" element={<TimeCardList />} />
           <Route path="/timecarddetail" element={<TimeCardDetail />} />
         </Route>

@@ -30,7 +30,7 @@ export const MyProfile = () => {
     return (
         <>
             <Loader show={loder} />
-            <div className='RoleAdminstrator'>
+            <div className='RoleAdministrator'>
                 <Container fluid>
                     <Row>
                         <Col md={3}>

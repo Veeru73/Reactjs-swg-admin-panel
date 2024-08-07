@@ -58,6 +58,12 @@ export const PoSidebar = () => {
                             }}>
                                 <LinkSidebar LinkIcon={<Image src='./assets/images/Employee.svg' />} LinkLabel={'Employee'} LinkPath={'/employeelist'} />
                             </li>
+                            <li className={pathname === "/joblist" || pathname === "/editjob" || pathname === "/createjob" ? 'active' : ""} style={{
+                                padding: '10px',
+                                position: 'relative'
+                            }}>
+                                <LinkSidebar LinkIcon={<Image src='./assets/images/Job.svg' />} LinkLabel={'Job'} LinkPath={'/joblist'} />
+                            </li>
 
                             <li className={pathname === "/createrole" || pathname === "/roleList" || pathname === "/rolelistdetail" ? 'active' : ""} style={{
                                 padding: '10px'
