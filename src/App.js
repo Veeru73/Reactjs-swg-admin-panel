@@ -20,6 +20,8 @@ import { TimeCardDetail } from './Pages/time_card/edit/TimeCardDetail';
 import { JobList } from './Pages/Job/list/JobList';
 import { CreateJob } from './Pages/Job/add/CreateJob';
 import { EditJob } from './Pages/Job/edit/EditJob';
+import { TimeRequestList } from './Pages/time_of_request/list/TimeRequestList';
+import { EditTimeRequest } from './Pages/time_of_request/Edit/EditTimeRequest';
 
 function App() {
 
@@ -46,6 +48,8 @@ function App() {
           <Route path="/editjob" element={<EditJob />} />
           <Route path="/timecard" element={<TimeCardList />} />
           <Route path="/timecarddetail" element={<TimeCardDetail />} />
+          <Route path="/timerequestlist" element={<TimeRequestList />} />
+          <Route path="/timerequestedit" element={<EditTimeRequest />} />
         </Route>
       </Routes >
     </>
