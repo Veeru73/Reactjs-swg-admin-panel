@@ -5,9 +5,6 @@ import moment from 'moment-timezone';
 export let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 
-
-
-
 export const TimezoneList = () => {
   const tzNames = moment.tz.names();
   return tzNames ? tzNames : [];
@@ -22,5 +19,9 @@ export const timeFormateArray = [
   { name: '12-Hours', "value": 'hh:mm:ss A' },
   { name: '24-Hours', "value": 'HH:mm:ss' }
 ]
+
+export const utcToLocalTime = (utcTime) => {
+  return moment.utc(utcTime).local().format('YYYY-MM-DD');
+}
 
 

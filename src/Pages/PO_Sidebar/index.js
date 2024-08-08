@@ -71,11 +71,16 @@ export const PoSidebar = () => {
                                 <LinkSidebar LinkIcon={<Image src='./assets/images/Role.svg' />} LinkLabel={'Role'} LinkPath={'/roleList'} />
                             </li>
 
+                            <li className={pathname === "/timeoffrequestlist" || pathname === "/timerequestedit" ? 'active' : ""} style={{
+                                padding: '10px'
+                            }}>
+                                <LinkSidebar LinkIcon={<Image src='./assets/images/TimeRequest.svg' />} LinkLabel={'Time off Request'} LinkPath={'/timeoffrequestlist'} />
+                            </li>
                             {/* <li className={pathname === "/timecarddetail" || pathname === "/timecard" || pathname === "/subcriptionlistdetail" ? 'active' : ""} style={{
                                 padding: '10px'
                             }}>
                                 <LinkSidebar LinkIcon={<Image src='./assets/images/Clock.svg' />} LinkLabel={'Time Card'} LinkPath={'/timecard'} />
-                            </li> */}
+                            </li>
                             {/* <li className={pathname === "/inventorymodulelist" || pathname === "/apparatusInfoDetails" || pathname === "/createGeareType" || pathname === "/gearinfo" || pathname === "/CreateGear" || pathname === "/CreateApparatus" || pathname === "/GearListDetail" ? 'active' : ""} style={{
                                 padding: '10px'
                             }}>

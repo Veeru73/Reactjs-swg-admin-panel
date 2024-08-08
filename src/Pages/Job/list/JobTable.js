@@ -28,7 +28,7 @@ export const JobTable = ({ pagination, maindata = [], pageHanlder, handleDeleteC
               <th>ODPI</th>
               <th>PW</th>
               {/* <th>JOB TYPE</th> */}
-              <th style={{ textAlign: "center" }}>ACTION</th>
+              <th>ACTION</th>
             </tr>
           </thead>
           <tbody>

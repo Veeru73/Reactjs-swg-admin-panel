@@ -230,6 +230,16 @@ export const deleteJob = async (id) => {
     return await deleteRequest(path);
 }
 
+export const getTimeOffRequests = async (page) => {
+    const path = `/timeoffrequest/getTimeOffRequests?page=${page}`;
+    return await getRequest(path);
+}
+
+export const updateTimeOffRequestStatus = async (id, data) => {
+    const path = `/timeoffrequest/updateTimeOffRequestStatus/${id}`;
+    return await putRequest(path, data);
+}
+
 
 
 
