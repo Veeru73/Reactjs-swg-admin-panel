@@ -20,10 +20,10 @@ export const VendorTable = ({ pagination, maindata = [], pageHanlder }) => {
         <Table responsive className='table table-hover'>
           <thead>
             <tr>
-              <th>OWNER NAME</th>
+              <th>VENDOR ID</th>
               <th>VENDOR NAME</th>
               <th>EMAIL</th>
-              <th>MOBILE NO</th>
+              <th>PHONE</th>
               <th>ADDRESS</th>
               <th style={{ textAlign: "center" }}>ACTION</th>
             </tr>
@@ -31,7 +31,7 @@ export const VendorTable = ({ pagination, maindata = [], pageHanlder }) => {
           <tbody>
             {maindata.map((account, index) => (
               <tr key={index}>
-                <td>{account.owner_name}</td>
+                <td>{account.id}</td>
                 <td>{account.vendor_name}</td>
                 <td>{account.email}</td>
                 <td>{account.phone_number}</td>

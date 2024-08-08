@@ -5,40 +5,38 @@ import { SharedButton } from '../../../components/Button';
 import Select from '../../../components/Select';
 import { errorAlert, successAlert } from '../../../components/Alert';
 import { useNavigate } from 'react-router-dom';
-import { getDepartments, addEmployee } from '../../../services/NetworkCall';
+import { getJobTypes, createJob } from '../../../services/NetworkCall';
 
 export const EmployeeForm = ({ setLoading }) => {
     const navigate = useNavigate();
-    const [departmentList, setDepartmentList] = useState([]);
+    const [jobTypeList, setJobTypeList] = useState([]);
 
-    const getDepartmentData = async () => {
-        const res = await getDepartments();
+    const getJobTypeData = async () => {
+        const res = await getJobTypes();
         if (res.success) {
             const data = res.data;
-            const mData = data.map(e => ({ name: e.department_name, value: e.id }));
-            setDepartmentList(mData);
+            const mData = data.map(e => ({ name: e.job_type_name, value: e.id }));
+            setJobTypeList(mData);
         }
     }
 
 
     useEffect(() => {
-        getDepartmentData();
+        getJobTypeData();
     }, []);
 
     const [indata, setIndata] = useState({
         "jobName": "",
-        "jobNumber": "",
         "due": "",
-        "jobType": "",
+        "jobTypeId": null,
         "odpi": "",
         "pw": ""
     });
 
     const [error, setError] = useState({
         "jobName": "",
-        "jobNumber": "",
         "due": "",
-        "jobType": "",
+        "jobTypeId": "",
         "odpi": "",
         "pw": "",
     });
@@ -57,35 +55,31 @@ export const EmployeeForm = ({ setLoading }) => {
             setError(prev => ({ ...prev, "jobName": "Job Name is required" }));
             isValid = 0;
         }
-        if (!indata.jobNumber) {
-            setError(prev => ({ ...prev, "jobNumber": "Job Number is required" }));
-            isValid = 0;
-        }
         if (!indata.due) {
             setError(prev => ({ ...prev, "due": "DUE is required" }));
             isValid = 0;
         }
-        if (!indata.jobType) {
-            setError(prev => ({ ...prev, "jobType": "Department is required" }));
+        if (!indata.jobTypeId) {
+            setError(prev => ({ ...prev, "jobTypeId": "Job type is required" }));
             isValid = 0;
         }
         if (!indata.odpi) {
-            setError(prev => ({ ...prev, "odpi": "Phone Number is required" }));
+            setError(prev => ({ ...prev, "odpi": "ODPI is required" }));
             isValid = 0;
         }
         if (!indata.pw) {
-            setError(prev => ({ ...prev, "pw": "Vehicel Number is required" }));
+            setError(prev => ({ ...prev, "pw": "pw  is required" }));
             isValid = 0;
         }
 
         if (isValid == 1) {
             setLoading(true);
-            const res = await addEmployee(indata);
+            const res = await createJob(indata);
             if (res.success) {
-                e.target.reset();
                 setLoading(false);
                 successAlert(res.message);
-                navigate("/employeelist");
+                e.target.reset();
+                navigate("/joblist");
             } else {
                 errorAlert(res.message);
             }
@@ -103,10 +97,7 @@ export const EmployeeForm = ({ setLoading }) => {
                                 <InputField FormType={'text'} FormLabel={"Job Name"} onChange={inputHandler} error={error.jobName} name='jobName' />
                             </Col>
                             <Col md={4}>
-                                <InputField FormType={'text'} FormLabel={"Job Number"} onChange={inputHandler} error={error.jobNumber} name='jobNumber' />
-                            </Col>
-                            <Col md={4}>
-                                <InputField FormType={'text'} FormLabel={"DUE"} onChange={inputHandler} error={error.due} name='due' />
+                                <InputField FormType={'number'} FormLabel={"DUE"} min='0' onChange={inputHandler} error={error.due} name='due' />
                             </Col>
                             <Col md={4}>
                                 <InputField FormType={'text'} FormLabel={"ODPI"} max='10' onChange={inputHandler} error={error.odpi} name='odpi' />
@@ -115,7 +106,7 @@ export const EmployeeForm = ({ setLoading }) => {
                                 <InputField FormType={'text'} FormLabel={"PW"} onChange={inputHandler} error={error.pw} name='pw' />
                             </Col>
                             <Col md={4}>
-                                <Select FormLabel='Job Type' Array={departmentList} FormPlaceHolder='Department' onChange={inputHandler} error={error.jobType} name='jobType' />
+                                <Select FormLabel='Job Type' Array={jobTypeList} FormPlaceHolder='Job Type' onChange={inputHandler} error={error.jobTypeId} name='jobTypeId' />
                             </Col>
                         </Row>
                         <Row className='mb-2 mt-4'>

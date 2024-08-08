@@ -27,22 +27,22 @@ export const JobTable = ({ pagination, maindata = [], pageHanlder, handleDeleteC
               <th>DUE</th>
               <th>ODPI</th>
               <th>PW</th>
-              <th>JOB TYPE</th>
+              {/* <th>JOB TYPE</th> */}
               <th style={{ textAlign: "center" }}>ACTION</th>
             </tr>
           </thead>
           <tbody>
-            {maindata.map((account, index) => (
+            {maindata.map((job, index) => (
               <tr key={index}>
-                <td>{account?.job_name}</td>
-                <td>{account?.job_number}</td>
-                <td>{account?.due}</td>
-                <td>{account?.odpi}</td>
-                <td>{account?.pw}</td>
-                <td>{account?.department?.job_type}</td>
+                <td>{job?.job_name}</td>
+                <td>{job?.job_number}</td>
+                <td>{job?.due}</td>
+                <td>{job?.odpi}</td>
+                <td>{job?.pw}</td>
+                {/* <td>{account?.department?.job_type}</td> */}
                 <td>
-                  <Button variant="success" size="sm" className='m-2' onClick={() => handleEditClick(account)} style={{ fontWeight: '500' }}><TbEdit /></Button>
-                  <Button variant="danger" size="sm" onClick={() => handleDeleteClick(account.id)} style={{ fontWeight: '500' }}><RiDeleteBinLine /></Button>
+                  <Button variant="success" size="sm" className='m-2' onClick={() => handleEditClick(job)} style={{ fontWeight: '500' }}><TbEdit /></Button>
+                  <Button variant="danger" size="sm" onClick={() => handleDeleteClick(job.id)} style={{ fontWeight: '500' }}><RiDeleteBinLine /></Button>
                 </td>
                 {/* <td>
                   <Button variant="light" size="sm" className="me-2"

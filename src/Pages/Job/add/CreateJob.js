@@ -11,7 +11,8 @@ import { ReactComponent as AddIconSvg } from '../../../images/Arrow-Left.svg';
 export const CreateJob = () => {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-    const handleCreateAccount = () => {
+
+    const handleBackButton = () => {
         navigate('/joblist');
     }
     return (
@@ -27,7 +28,7 @@ export const CreateJob = () => {
                             <Headings MainHeading={"Create Job"} />
                             <div className='my-md-4'>
                                 <div className='text-right'>
-                                    <SharedButton onClick={handleCreateAccount} BtnLabel={"Back"} BtnVariant={'light'} style={{ background: '#00285D' }} startIcon={<AddIconSvg />} />
+                                    <SharedButton onClick={handleBackButton} BtnLabel={"Back"} BtnVariant={'light'} style={{ background: '#00285D' }} startIcon={<AddIconSvg />} />
                                 </div>
                                 <div className='bgWhite mt-3'>
                                     <EmployeeForm setLoading={setLoading} />

@@ -88,6 +88,11 @@ export default function RoleFullDetails({ setLoading }) {
             return
         }
 
+        if (selectedPrivilegeIds.length == 0) {
+            errorAlert("Select module");
+            return;
+        }
+
         setLoading(true);
 
         const data = { roleName, privilegeIds: selectedPrivilegeIds };

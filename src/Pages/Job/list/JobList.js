@@ -7,7 +7,7 @@ import { SharedButton } from '../../../components/Button';
 import { useNavigate } from 'react-router-dom';
 import { Loader } from '../../../components/Loader';
 import { useEffect, useState } from 'react';
-import { getEmployees, deleteEmployee } from "../../../services/NetworkCall"
+import { getJobs, deleteJob } from "../../../services/NetworkCall"
 import Swal from 'sweetalert2';
 import { SearchPanel } from '../../../components/SearchPanel';
 import { IoSearch } from 'react-icons/io5';
@@ -21,9 +21,9 @@ export const JobList = () => {
     const [pagination, setPagination] = useState({ totalPages: 1, page: 1 })
     const [searchTerm, setSearchTerm] = useState('');
 
-    const getEmployeeData = async (page = 1, search = '') => {
+    const getJobsData = async (page = 1, search = '') => {
         setLoading(true);
-        const res = await getEmployees(page, search);
+        const res = await getJobs(page, search);
         if (res.success) {
             setMaindata(res.data);
             setPagination(prevPagination => ({
@@ -38,7 +38,7 @@ export const JobList = () => {
     }
 
     useEffect(() => {
-        getEmployeeData(pagination.page, searchTerm);
+        getJobsData(pagination.page, searchTerm);
     },
         [pagination.page, searchTerm]);
 
@@ -47,10 +47,10 @@ export const JobList = () => {
             ...prevPagination,
             page: page
         }));
-        getEmployeeData(page);
+        getJobsData(page);
     }
 
-    const handleCreateAccount = () => {
+    const handleCreateJob = () => {
         navigate('/createjob');
     }
 
@@ -80,7 +80,7 @@ export const JobList = () => {
             confirmButtonText: "Yes, delete it!"
         }).then(async (result) => {
             if (result.isConfirmed) {
-                const res = await deleteEmployee(id);
+                const res = await deleteJob(id);
 
                 if (res.success) {
                     setLoading(false);
@@ -90,7 +90,7 @@ export const JobList = () => {
                         icon: "success"
                     }).then(async (result) => {
                         if (result.isConfirmed) {
-                            getEmployeeData()
+                            getJobsData()
                             // navigate("/vendorlist");
                         }
                     });
@@ -112,9 +112,9 @@ export const JobList = () => {
                         <Col md={9}>
                             <Headings MainHeading={"Job List"} />
                             <div className='text-right mb-3'>
-                                <SharedButton onClick={handleCreateAccount} BtnLabel={"Create Job"} BtnVariant={'light'} style={{ background: '#00285D' }} startIcon={<AddIconSvg />} />
+                                <SharedButton onClick={handleCreateJob} BtnLabel={"Create Job"} BtnVariant={'light'} style={{ background: '#00285D' }} startIcon={<AddIconSvg />} />
                             </div>
-                            <SearchPanel StartIcon={<IoSearch />} FormPlaceHolder={"Search by Name"} onChange={searchHandler} />
+                            <SearchPanel StartIcon={<IoSearch />} FormPlaceHolder={"Search by Job Name"} onChange={searchHandler} />
                             <JobTable
                                 pagination={pagination}
                                 maindata={maindata}

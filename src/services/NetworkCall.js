@@ -105,7 +105,6 @@ export const login = async (data) => {
     return await postRequest(path, data);
 };
 
-// admin apis-----------------------------------------start
 export const addVendor = async (data) => {
     const path = "/admin/vendor/addVendor";
     return await postRequest(path, data);
@@ -206,8 +205,31 @@ export const deleteRole = async (id) => {
     return await deleteRequest(path);
 }
 
+export const getJobTypes = async () => {
+    const path = `/admin/jobType/getJobTypes`;
+    return await getRequest(path);
+}
 
-// admin-apis------------------------end-------------------------------
+export const getJobs = async (page, search) => {
+    const path = `/admin/job/getJobs?page=${page}&search=${search}`;
+    return await getRequest(path);
+}
+
+export const createJob = async (data) => {
+    const path = `/admin/job/createJob`;
+    return await postRequest(path, data);
+}
+
+export const updateJob = async (data) => {
+    const path = `/admin/job/updateJob/${data.id}`;
+    return await putRequest(path, data);
+}
+
+export const deleteJob = async (id) => {
+    const path = `/admin/job/deleteJob/${id}`;
+    return await deleteRequest(path);
+}
+
 
 
 

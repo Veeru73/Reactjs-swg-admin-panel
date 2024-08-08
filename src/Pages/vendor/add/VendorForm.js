@@ -5,25 +5,26 @@ import { SharedButton } from '../../../components/Button';
 import { errorAlert, successAlert } from '../../../components/Alert';
 import { useNavigate } from 'react-router-dom';
 import { addVendor } from '../../../services/NetworkCall';
+import { invalid } from 'moment';
 
 
 export const VendorForm = ({ setLoading }) => {
     const navigate = useNavigate();
 
     const [data, setdata] = useState({
-        "ownerName": "",
-        "vendorName": "",
-        "email": "",
-        "address": "",
-        "phoneNumber": ""
-    });
-
-    const [error, setError] = useState({
-        "ownerName": "",
         "vendorName": "",
         "email": "",
         "address": "",
         "phoneNumber": "",
+        "terms": ""
+    });
+
+    const [error, setError] = useState({
+        "vendorName": "",
+        "email": "",
+        "address": "",
+        "phoneNumber": "",
+        "terms": ""
     });
 
 
@@ -38,13 +39,14 @@ export const VendorForm = ({ setLoading }) => {
 
         let isValid = 1;
 
-        if (!data.ownerName) {
-            setError(prev => ({ ...prev, "ownerName": "Owner Name is required" }));
-            isValid = 0;
-        }
         if (!data.vendorName) {
             setError(prev => ({ ...prev, "vendorName": "Vendor Name is required" }));
             isValid = 0;
+        }
+
+        if (!data.terms) {
+            setError(prev => ({ ...prev, "terms": "Terms is required" }));
+            invalid = 0;
         }
         if (!data.email) {
             setError(prev => ({ ...prev, "email": "Email is required" }));
@@ -88,9 +90,9 @@ export const VendorForm = ({ setLoading }) => {
                 <Container>
                     <Form onSubmit={handleSubmit}>
                         <Row className='mb-2'>
-                            <Col md={4}>
+                            {/* <Col md={4}>
                                 <InputField FormType={'text'} FormLabel={"Owner Name"} onChange={inputHandler} error={error.ownerName} name='ownerName' FormPlaceHolder='owner name' />
-                            </Col>
+                            </Col> */}
                             <Col md={4}>
                                 <InputField FormType={'text'} FormLabel={"Vendor Name"} onChange={inputHandler} error={error.vendorName} name='vendorName' FormPlaceHolder='vendor name' />
                             </Col>
@@ -102,6 +104,9 @@ export const VendorForm = ({ setLoading }) => {
                             </Col>
                             <Col md={4}>
                                 <InputField FormType={'text'} FormLabel={"Address"} onChange={inputHandler} error={error.address} name='address' FormPlaceHolder='enter address' />
+                            </Col>
+                            <Col md={4}>
+                                <InputField FormType={'text'} FormLabel={"Terms"} onChange={inputHandler} error={error.terms} name='terms' FormPlaceHolder='enter terms' />
                             </Col>
                         </Row>
                         <Row className='mb-2 mt-4'>

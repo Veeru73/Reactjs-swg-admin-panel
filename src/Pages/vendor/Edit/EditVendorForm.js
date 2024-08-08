@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Container, Row, Form, Button } from 'react-bootstrap';
+import { Col, Container, Row, Form, Button, Stack } from 'react-bootstrap';
 import { InputField } from '../../../components/InputField';
 import { SharedButton } from '../../../components/Button';
 import { errorAlert, successAlert } from '../../../components/Alert';
@@ -10,18 +10,18 @@ import Swal from 'sweetalert2';
 import { updateVendor, deleteVendor } from '../../../services/NetworkCall';
 
 export const EditVendorForm = ({ setLoading, pre }) => {
-    const [isdelete, setIsdelete] = useState(false);
     const navigate = useNavigate();
     const [isedit, setIsedit] = useState(false);
     const [premain, setPremain] = useState();
-
     const [indata, setIndata] = useState({
         id: 0,
         ownerName: "",
         vendorName: "",
         email: "",
         address: "",
-        phoneNumber: ""
+        phoneNumber: "",
+        terms: "",
+        status: ""
     });
 
     useEffect(() => {
@@ -33,17 +33,34 @@ export const EditVendorForm = ({ setLoading, pre }) => {
                 vendorName: pre.vendor_name,
                 address: pre.address,
                 email: pre.email,
-                phoneNumber: pre.phone_number
+                phoneNumber: pre.phone_number,
+                terms: pre.terms,
+                status: pre.status
             });
         }
     }, [pre]);
+
+    const handleSwitchChange = async (e) => {
+        const newStatus = e.target.checked ? 1 : 0;
+        setLoading(true);
+        const res = await updateVendor({ id: indata.id, status: newStatus });
+        if (res.success) {
+            setIndata((prev) => ({ ...prev, status: newStatus }));
+            successAlert(res.message);
+        } else {
+            errorAlert(res.message);
+        }
+        setLoading(false)
+    };
+
 
     const [error, setError] = useState({
         ownerName: "",
         vendorName: "",
         email: "",
         address: "",
-        phoneNumber: ""
+        phoneNumber: "",
+        terms: ""
     });
 
     const inputHandler = (e) => {
@@ -57,8 +74,8 @@ export const EditVendorForm = ({ setLoading, pre }) => {
 
         let isValid = 1;
 
-        if (!indata.ownerName) {
-            setError(prev => ({ ...prev, "ownerName": "Owner Name is required" }));
+        if (!indata.terms) {
+            setError(prev => ({ ...prev, "terms": "Terms is required" }));
             isValid = 0;
         }
         if (!indata.vendorName) {
@@ -139,12 +156,12 @@ export const EditVendorForm = ({ setLoading, pre }) => {
                                 <Col md={4}>
                                     <InputField
                                         FormType={'text'}
-                                        FormLabel={"Owner Name"}
+                                        FormLabel={"Terms"}
                                         onChange={inputHandler}
-                                        error={error.ownerName}
-                                        value={indata.ownerName}
-                                        name='ownerName'
-                                        FormPlaceHolder={"Jenny"} />
+                                        error={error.terms}
+                                        value={indata.terms}
+                                        name='terms'
+                                        FormPlaceHolder={"Net-30"} />
                                 </Col>
                                 <Col md={4}>
                                     <InputField
@@ -170,7 +187,7 @@ export const EditVendorForm = ({ setLoading, pre }) => {
                                 <Col md={4}>
                                     <InputField
                                         FormType={'tel'}
-                                        FormLabel={"Phone No"}
+                                        FormLabel={"Phone"}
                                         max='10'
                                         onChange={inputHandler}
                                         error={error.phoneNumber}
@@ -208,10 +225,10 @@ export const EditVendorForm = ({ setLoading, pre }) => {
                                 <Button variant="danger" size="sm" onClick={() => deleteHandler(indata.id)} style={{ fontWeight: '500' }}><RiDeleteBinLine /></Button>
                             </Col>
                         </Row>
-                        <Row className='mb-5 mt-3'>
+                        <Row className='mb-3 mt-3'>
                             <Col md={4}>
-                                <h6>Owner Name</h6>
-                                <p>{indata.ownerName}</p>
+                                <h6>Vendor ID</h6>
+                                <p>{indata.id}</p>
                             </Col>
                             <Col md={4}>
                                 <h6>Vendor Name</h6>
@@ -222,14 +239,31 @@ export const EditVendorForm = ({ setLoading, pre }) => {
                                 <p>{indata.email}</p>
                             </Col>
                             <Col md={4}>
-                                <h6>Phone No</h6>
+                                <h6>Phone</h6>
                                 <p>{indata.phoneNumber}</p>
                             </Col>
                             <Col md={4}>
                                 <h6>Address</h6>
                                 <p>{indata.address}</p>
                             </Col>
+                            <Col md={4}>
+                                <h6>Terms</h6>
+                                <p>{indata.terms}</p>
+                            </Col>
                         </Row>
+                        <Stack direction='horizontal' gap={2}>
+                            <div className="form-check form-switch">
+                                <Form.Label className="form-check-label" for="flexSwitchCheckDefault">{indata.status == 1 ? "Active" : "Inactive"}</Form.Label>
+                                <Form.Control
+                                    className="form-check-input"
+                                    type="checkbox"
+                                    role="switch"
+                                    id="flexSwitchCheckDefault"
+                                    checked={indata.status == 1 ? true : false}
+                                    onChange={handleSwitchChange}
+                                />
+                            </div>
+                        </Stack>
                     </Container>
                 </div>
             )}

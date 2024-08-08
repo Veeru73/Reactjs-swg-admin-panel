@@ -15,9 +15,9 @@ export const CreateRoleForm = ({ setLoading }) => {
 
 
     // master privilegs data || modules list based on platform
-    const getPrivilegesData = async (platform) => {
+    const getPrivilegesData = async () => {
         setLoading(true);
-        const res = await getPrivileges(platform);
+        const res = await getPrivileges();
 
         if (res.success) {
             setPrivileges(res.data);
@@ -34,6 +34,11 @@ export const CreateRoleForm = ({ setLoading }) => {
         if (!roleName || roleName == "") {
             errorAlert("Please Enter Role")
             return;
+        }
+
+        if (selectedPrivilegeIds.length == 0) {
+            errorAlert("Select module");
+            return
         }
 
         const data = { roleName, privilegeIds: selectedPrivilegeIds }
