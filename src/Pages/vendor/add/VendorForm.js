@@ -46,7 +46,7 @@ export const VendorForm = ({ setLoading }) => {
 
         if (!data.terms) {
             setError(prev => ({ ...prev, "terms": "Terms is required" }));
-            invalid = 0;
+            isValid = 0;
         }
         if (!data.email) {
             setError(prev => ({ ...prev, "email": "Email is required" }));

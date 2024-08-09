@@ -7,6 +7,7 @@ import { errorAlert, successAlert } from '../../../components/Alert';
 import { useNavigate } from 'react-router-dom';
 import { getDepartments, addEmployee } from '../../../services/NetworkCall';
 import DatePicker from '../../../components/DatePicker';
+import moment from 'moment';
 
 export const EmployeeForm = ({ setLoading }) => {
     const navigate = useNavigate();
@@ -94,7 +95,10 @@ export const EmployeeForm = ({ setLoading }) => {
 
         if (isValid == 1) {
             setLoading(true);
-            const res = await addEmployee(indata);
+            // formate hire date before send
+            const formattedEmployeeHireDate = moment(indata.employeeHireDate).format('YYYY-MM-DD');
+            const formateIndata = { ...indata, employeeHireDate: formattedEmployeeHireDate };
+            const res = await addEmployee(formateIndata);
             if (res.success) {
                 e.target.reset();
                 setLoading(false);
