@@ -22,6 +22,7 @@ import { CreateJob } from './Pages/Job/add/CreateJob';
 import { EditJob } from './Pages/Job/edit/EditJob';
 import { TimeOffRequestList } from './Pages/time_off_request/list/TimeOffRequestList';
 import { TimeOffRequestDetail } from './Pages/time_off_request/detail/TimeOffRequestDetail';
+import { Error404 } from './commonpages/Error404';
 
 function App() {
 
@@ -50,6 +51,7 @@ function App() {
           <Route path="/timecarddetail" element={<TimeCardDetail />} />
           <Route path="/timeoffrequestlist" element={<TimeOffRequestList />} />
           <Route path="/timeoffrequestdetail" element={<TimeOffRequestDetail />} />
+          <Route path="/404" element={<Error404 />} />
         </Route>
       </Routes >
     </>
