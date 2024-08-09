@@ -90,8 +90,6 @@ const getRequest = async (path) => {
             headers: getHeader(),
         });
         res = response.data;
-
-        console.log("this is response-----------", res)
     } catch (err) {
         res.message = err.response?.data.message || err.message;
         return res;

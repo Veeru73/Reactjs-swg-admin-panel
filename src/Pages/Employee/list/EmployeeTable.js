@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { ReactComponent as EyeIconSvg } from '../../../../src/images/Eye.svg';
 import { TbEdit } from 'react-icons/tb';
 import { RiDeleteBinLine } from 'react-icons/ri';
+import { utcToLocalTime } from '../../../helper/Helper';
 
 
 export const EmployeeTable = ({ pagination, maindata = [], pageHanlder, handleDeleteClick }) => {
@@ -28,6 +29,8 @@ export const EmployeeTable = ({ pagination, maindata = [], pageHanlder, handleDe
               <th>MOBILE NO</th>
               <th>VEHICLE NO</th>
               <th>DEPARTMENT NAME</th>
+              <th>HIRE DATE</th>
+              <th>LAST LOGIN</th>
               <th style={{ textAlign: "center" }}>ACTION</th>
             </tr>
           </thead>
@@ -40,6 +43,8 @@ export const EmployeeTable = ({ pagination, maindata = [], pageHanlder, handleDe
                 <td>{account?.phone_number}</td>
                 <td>{account?.vehicle_number}</td>
                 <td>{account?.department?.department_name}</td>
+                <td>{account?.employee_hire_date}</td>
+                <td>{account?.last_login_at ? utcToLocalTime(account.last_login_at) : "NA"}</td>
                 <td>
                   <Button variant="success" size="sm" className='m-2' onClick={() => handleEditClick(account)} style={{ fontWeight: '500' }}><TbEdit /></Button>
                   <Button variant="danger" size="sm" onClick={() => handleDeleteClick(account.id)} style={{ fontWeight: '500' }}><RiDeleteBinLine /></Button>

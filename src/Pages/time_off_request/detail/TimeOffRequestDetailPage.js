@@ -9,7 +9,7 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import Swal from 'sweetalert2';
 import { updateTimeOffRequestStatus } from '../../../services/NetworkCall';
 import { SharedMultiSelect } from '../../../components/SharedMultiSelect';
-import { utcToLocalTime } from '../../../helper/Helper';
+import { utcToLocal } from '../../../helper/Helper';
 
 export const TimeOffRequestDetailPage = ({ setLoading, pre }) => {
     const navigate = useNavigate();
@@ -77,7 +77,7 @@ export const TimeOffRequestDetailPage = ({ setLoading, pre }) => {
                             <Badge className='bg-light text-dark p-3 w-50'>
                                 <Stack direction='Vertical' gap={2} justifyContent="space-between" alignItem="center">
                                     <h5 className='mb-0'>Submission Date</h5>
-                                    <p className='mb-0'>{utcToLocalTime(preData?.createdAt)}</p>
+                                    <p className='mb-0'>{utcToLocal(preData?.createdAt)}</p>
                                 </Stack>
                             </Badge>
                             <Badge className='bg-light text-dark p-3 w-50'>

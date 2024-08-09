@@ -3,7 +3,7 @@ import { Badge, Button, Table } from 'react-bootstrap';
 import { TablePagination } from '../../../components/TablePagination';
 import { useNavigate } from 'react-router-dom';
 import {
-    utcToLocalTime
+    utcToLocal
 
 } from '../../../helper/Helper';
 export const TimeOffRequestTable = ({ timeOffRequestData, pagination, pageHanlder }) => {
@@ -47,7 +47,7 @@ export const TimeOffRequestTable = ({ timeOffRequestData, pagination, pageHanlde
                     <tbody>
                         {timeOffRequestData && timeOffRequestData.map((e, i) => (
                             <tr key={i}>
-                                <td>{utcToLocalTime(e.createdAt)}</td>
+                                <td>{utcToLocal(e.createdAt)}</td>
                                 <td>{e.user?.first_name} {e.user?.last_name}</td>
                                 <td>{e.time_off_reason?.reason}</td>
                                 <td>{getStatusBadge(e.status)}</td>

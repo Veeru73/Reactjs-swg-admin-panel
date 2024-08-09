@@ -32,7 +32,7 @@ export const TimeOffRequestDetail = () => {
                             <PoSidebar />
                         </Col>
                         <Col md={9}>
-                            <Headings MainHeading={"Time Of Request Detail"} />
+                            <Headings MainHeading={"Time off Request Detail"} />
                             <div className='my-md-4'>
                                 <div className='text-right'>
                                     <SharedButton BtnLabel={"Back"} onClick={() => window.history.back()} BtnVariant={'light'} startIcon={<AddIconSvg />} />

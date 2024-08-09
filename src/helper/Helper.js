@@ -20,8 +20,14 @@ export const timeFormateArray = [
   { name: '24-Hours', "value": 'HH:mm:ss' }
 ]
 
-export const utcToLocalTime = (utcTime) => {
+export const utcToLocal = (utcTime) => {
   return moment.utc(utcTime).local().format('YYYY-MM-DD');
 }
+
+
+export const utcToLocalTime = (utcTime) => {
+  return moment.utc(utcTime).local().format('YYYY-MM-DD hh:mm:ss A');
+}
+
 
 

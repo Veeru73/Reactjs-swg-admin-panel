@@ -55,7 +55,7 @@ export const TimeOffRequestList = () => {
                             <PoSidebar />
                         </Col>
                         <Col md={9}>
-                            <Headings MainHeading={"Time Of Request"} />
+                            <Headings MainHeading={"Time off Request"} />
                             <TimeOffRequestTable
                                 timeOffRequestData={timeOffRequestData}
                                 pagination={pagination}

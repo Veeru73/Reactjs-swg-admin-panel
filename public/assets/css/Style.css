@@ -332,3 +332,7 @@ div#my-typeahead-id {
   text-decoration: none !important;
   z-index: 999 !important;
 }
+
+.react-datepicker-wrapper {
+  width: 100%;
+}

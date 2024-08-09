@@ -6,6 +6,7 @@ import Select from '../../../components/Select';
 import { errorAlert, successAlert } from '../../../components/Alert';
 import { useNavigate } from 'react-router-dom';
 import { getDepartments, addEmployee } from '../../../services/NetworkCall';
+import DatePicker from '../../../components/DatePicker';
 
 export const EmployeeForm = ({ setLoading }) => {
     const navigate = useNavigate();
@@ -31,7 +32,8 @@ export const EmployeeForm = ({ setLoading }) => {
         "email": "",
         "departmentId": "",
         "phoneNumber": "",
-        "vehicleNumber": ""
+        "vehicleNumber": "",
+        "employeeHireDate": new Date()  // Set default date to today
     });
 
     const [error, setError] = useState({
@@ -41,6 +43,7 @@ export const EmployeeForm = ({ setLoading }) => {
         "departmentId": "",
         "phoneNumber": "",
         "vehicleNumber": "",
+        "employeeHireDate": ""
     });
 
     const inputHandler = (e) => {
@@ -48,6 +51,11 @@ export const EmployeeForm = ({ setLoading }) => {
         setIndata((pre) => ({ ...pre, [name]: value }));
         setError((pre) => ({ ...pre, [name]: "" }));
     }
+
+    const handleDateChange = (date) => {
+        setIndata((pre) => ({ ...pre, employeeHireDate: date }));
+        setError((pre) => ({ ...pre, employeeHireDate: "" }));
+    };
 
 
     const handleSubmit = async (e) => {
@@ -57,6 +65,12 @@ export const EmployeeForm = ({ setLoading }) => {
             setError(prev => ({ ...prev, "firstName": "First Name is required" }));
             isValid = 0;
         }
+
+        if (!indata.employeeHireDate) {
+            setError(prev => ({ ...prev, "employeeHireDate": "Hire date is required" }));
+            isValid = 0;
+        }
+
         if (!indata.lastName) {
             setError(prev => ({ ...prev, "lastName": "Last Name is required" }));
             isValid = 0;
@@ -116,6 +130,15 @@ export const EmployeeForm = ({ setLoading }) => {
                             </Col>
                             <Col md={4}>
                                 <Select FormLabel='Select Department' Array={departmentList} FormPlaceHolder='Department' onChange={inputHandler} error={error.departmentId} name='departmentId' />
+                            </Col>
+                            <Col md={4}>
+                                <label className='mb-2'>Hire Date</label>
+                                <DatePicker
+                                    className="w-100"
+                                    selectedDate={indata.employeeHireDate}
+                                    onDateChange={handleDateChange}
+                                />
+                                {error.employeeHireDate && <div className="text-danger">{error.employeeHireDate}</div>}
                             </Col>
                         </Row>
                         <Row className='mb-2 mt-4'>
