@@ -44,7 +44,7 @@ export const EmployeeTable = ({ pagination, maindata = [], pageHanlder, handleDe
                 <td>{account?.vehicle_number}</td>
                 <td>{account?.department?.department_name}</td>
                 <td>{account?.employee_hire_date}</td>
-                <td>{account?.last_login_at ? utcToLocalTime(account.last_login_at) : "NA"}</td>
+                <td>{account?.last_login_at ? utcToLocalTime(account.last_login_at) : "Not Yet Logged In"}</td>
                 <td>
                   <Button variant="success" size="sm" className='m-2' onClick={() => handleEditClick(account)} style={{ fontWeight: '500' }}><TbEdit /></Button>
                   <Button variant="danger" size="sm" onClick={() => handleDeleteClick(account.id)} style={{ fontWeight: '500' }}><RiDeleteBinLine /></Button>

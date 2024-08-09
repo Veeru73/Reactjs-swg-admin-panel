@@ -51,7 +51,7 @@ function App() {
           <Route path="/timecarddetail" element={<TimeCardDetail />} />
           <Route path="/timeoffrequestlist" element={<TimeOffRequestList />} />
           <Route path="/timeoffrequestdetail" element={<TimeOffRequestDetail />} />
-          <Route path="/404" element={<Error404 />} />
+          <Route path="*" element={<Error404 />} />
         </Route>
       </Routes >
     </>
