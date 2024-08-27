@@ -10,16 +10,19 @@ import { ReactComponent as AddIconSvg } from '../../../../src/images/Add.svg';
 import { getDepartments, getDepartmentWithSupervisor, getTimeOffRequests } from '../../../services/NetworkCall';
 import { errorAlert, successAlert } from '../../../components/Alert';
 import { Loader } from '../../../components/Loader'
+import { SearchPanel } from '../../../components/SearchPanel';
+import { IoSearch } from 'react-icons/io5';
 
 export const TimeOffRequestList = () => {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const [timeOffRequestData, setTimeOffRequestData] = useState([]);
     const [pagination, setPagination] = useState({ totalPages: 1, page: 1 });
+    const [searchTerm, setSearchTerm] = useState('');
 
-    const getTimeOffRequestData = async (page) => {
+    const getTimeOffRequestData = async (page, search = '') => {
         setLoading(true);
-        const res = await getTimeOffRequests(page);
+        const res = await getTimeOffRequests(page, search);
         if (res.success) {
             setTimeOffRequestData(res.data);
             setPagination(prevPagination => ({
@@ -33,9 +36,8 @@ export const TimeOffRequestList = () => {
         setLoading(false);
     }
 
-    useEffect(() => { getTimeOffRequestData(pagination.page) }, []);
+    useEffect(() => { getTimeOffRequestData(pagination.page, searchTerm) }, [pagination.page, searchTerm]);
 
-    const handleCreateRole = () => { navigate('/createdepartment'); }
 
     const pageHanlder = (page) => {
         setPagination(prevPagination => ({
@@ -44,6 +46,15 @@ export const TimeOffRequestList = () => {
         }));
         getTimeOffRequestData(page);
     }
+
+    const searchHandler = (e) => {
+        const key = e.target.value;
+        setSearchTerm(key);
+        setPagination(prevPagination => ({
+            ...prevPagination,
+            page: 1
+        }));
+    };
 
     return (
         <>
@@ -56,6 +67,7 @@ export const TimeOffRequestList = () => {
                         </Col>
                         <Col md={9}>
                             <Headings MainHeading={"Time off Request"} />
+                            <SearchPanel StartIcon={<IoSearch />} FormPlaceHolder={"Search by Name"} onChange={searchHandler} />
                             <TimeOffRequestTable
                                 timeOffRequestData={timeOffRequestData}
                                 pagination={pagination}

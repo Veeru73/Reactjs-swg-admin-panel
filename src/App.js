@@ -25,34 +25,49 @@ import { TimeOffRequestDetail } from './Pages/time_off_request/detail/TimeOffReq
 import { Error404 } from './commonpages/Error404';
 
 function App() {
-
   return (
     <>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/" element={<ForgotPassword />} />
-        <Route element={<Auth />} >
+
+        {/* Protected Routes */}
+        <Route element={<Auth requiredPrivileges={['vendormodule']} />} >
           <Route path="/vendorlist" element={<VendorList />} />
-          <Route path="/roleList" element={<RoleList />} />
-          <Route path="/createrole" element={<CreateRole />} />
-          <Route path="/rolelistdetail" element={<RoleListDetail />} />
           <Route path="/createvendor" element={<CreateVendor />} />
           <Route path="/editvendor" element={<EditVendor />} />
-          <Route path="/createdepartment" element={<CreateDepartment />} />
+        </Route>
+
+        <Route element={<Auth requiredPrivileges={['departmentmodule']} />} >
           <Route path="/departmentlist" element={<DepartmentList />} />
+          <Route path="/createdepartment" element={<CreateDepartment />} />
           <Route path="/editdepartment" element={<EditDepartment />} />
+        </Route>
+
+        <Route element={<Auth requiredPrivileges={['employeemodule']} />} >
           <Route path="/employeelist" element={<EmployeeList />} />
           <Route path="/createemployee" element={<CreateEmployee />} />
           <Route path="/editemployee" element={<EditEmployee />} />
+        </Route>
+
+        <Route element={<Auth requiredPrivileges={['rolemodule']} />} >
+          <Route path="/roleList" element={<RoleList />} />
+          <Route path="/createrole" element={<CreateRole />} />
+          <Route path="/rolelistdetail" element={<RoleListDetail />} />
+        </Route>
+
+        <Route element={<Auth requiredPrivileges={['jobmodule']} />} >
           <Route path="/joblist" element={<JobList />} />
           <Route path="/createjob" element={<CreateJob />} />
           <Route path="/editjob" element={<EditJob />} />
-          <Route path="/timecard" element={<TimeCardList />} />
-          <Route path="/timecarddetail" element={<TimeCardDetail />} />
+        </Route>
+
+        <Route element={<Auth requiredPrivileges={['timeoffrequestmodule']} />} >
           <Route path="/timeoffrequestlist" element={<TimeOffRequestList />} />
           <Route path="/timeoffrequestdetail" element={<TimeOffRequestDetail />} />
-          <Route path="*" element={<Error404 />} />
         </Route>
+
+        <Route path="*" element={<Error404 />} />
       </Routes >
     </>
   );

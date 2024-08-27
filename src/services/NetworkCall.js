@@ -1,7 +1,5 @@
-import axios from "axios";
 import moment from "moment";
-
-const baseUrl = process.env.REACT_APP_baseUrl;
+import { axiosInstance } from "./AxiosInstance";
 
 const getHeader = () => {
     const authToken = localStorage.getItem("authToken");
@@ -20,12 +18,7 @@ const postRequest = async (path, data) => {
         message: "Something went wrong, please try again later",
     };
     try {
-        const response = await axios({
-            method: "POST",
-            url: `${baseUrl}${path}`,
-            data,
-            headers: getHeader(),
-        });
+        const response = await axiosInstance.post(path, data, { headers: getHeader() });
         res = response.data;
     } catch (err) {
         res.message = err.response?.data.message || err.message;
@@ -41,12 +34,7 @@ const deleteRequest = async (path, data) => {
     };
 
     try {
-        const response = await axios({
-            method: "DELETE",
-            url: `${baseUrl}${path}`,
-            data,
-            headers: getHeader(),
-        });
+        const response = await axiosInstance.delete(path, data, { headers: getHeader() });
         res = response.data;
     } catch (err) {
         res.message = err.response?.data.message || err.message;
@@ -62,12 +50,7 @@ const putRequest = async (path, data) => {
     };
 
     try {
-        const response = await axios({
-            method: "PUT",
-            url: `${baseUrl}${path}`,
-            data,
-            headers: getHeader(),
-        });
+        const response = await axiosInstance.put(path, data, { headers: getHeader() });
         res = response.data;
     } catch (err) {
         res.message = err.response?.data.message || err.message;
@@ -83,12 +66,7 @@ const getRequest = async (path) => {
     };
 
     try {
-        const response = await axios({
-            method: "GET",
-            url: `${baseUrl}${path}`,
-            // params: data,
-            headers: getHeader(),
-        });
+        const response = await axiosInstance.get(path, { headers: getHeader() });
         res = response.data;
     } catch (err) {
         res.message = err.response?.data.message || err.message;
@@ -228,8 +206,8 @@ export const deleteJob = async (id) => {
     return await deleteRequest(path);
 }
 
-export const getTimeOffRequests = async (page) => {
-    const path = `/timeoffrequest/getTimeOffRequests?page=${page}`;
+export const getTimeOffRequests = async (page, searchTerm) => {
+    const path = `/timeoffrequest/getTimeOffRequests?page=${page}&search=${searchTerm}`;
     return await getRequest(path);
 }
 

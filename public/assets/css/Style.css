@@ -23,6 +23,7 @@ button.btn.btn-light {
 
 .CO_Sidebar {
   background: #fff;
+  min-height: 100vh;
 }
 
 .CO_Sidebar li:hover {

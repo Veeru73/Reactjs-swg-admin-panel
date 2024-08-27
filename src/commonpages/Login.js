@@ -4,11 +4,12 @@ import { InputField } from '../components/InputField'
 import { Checkbox } from '../components/Checkbox'
 import { SharedButton } from '../components/Button'
 import { Loader } from '../components/Loader'
-import { emailPattern } from '../helper/Helper'
+import { emailPattern, redirectBasedOnPrivilege } from '../helper/Helper'
 import { login } from '../services/NetworkCall';
 import { errorAlert, successAlert } from '../components/Alert'
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from "../states/AuthContext";
+import { FaEye, FaEyeSlash, } from 'react-icons/fa'; // Import icons for show/hide
 
 export const Login = () => {
     const { setLoggedIn, setProfileData } = useContext(AuthContext);
@@ -16,11 +17,16 @@ export const Login = () => {
     const [error, setError] = useState({ "email": "", "password": "" });
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false); // State to handle password visibility
 
     const inputHandler = (e) => {
         const { name, value } = e.target;
         setIndata((pre) => ({ ...pre, [name]: value }));
         setError((pre) => ({ ...pre, [name]: "" }));
+    }
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
     }
 
     const checkHenlder = (e) => {
@@ -72,7 +78,9 @@ export const Login = () => {
                 localStorage.setItem("authToken", `${res.data.token}`);
                 localStorage.setItem("profileData", JSON.stringify(res.data));
                 successAlert(res.message)
-                navigate("/vendorlist", { replace: true });
+
+                // Redirect based on privileges
+                redirectBasedOnPrivilege({ privileges: res.data.privileges, navigate: navigate, userType: res.data.user_type });
             } else {
                 errorAlert(res.message);
             }
@@ -80,6 +88,8 @@ export const Login = () => {
         }
 
     }
+
+
     return (
         <>
             <Loader show={loading} />
@@ -107,7 +117,7 @@ export const Login = () => {
                                         onChange={inputHandler}
                                         error={error.email}
                                     />
-                                    <InputField
+                                    {/* <InputField
                                         FormLabel={"Password"}
                                         FormType={"password"}
                                         FormPlaceHolder={"Enter Your Password"}
@@ -115,7 +125,27 @@ export const Login = () => {
                                         value={indata.password}
                                         onChange={inputHandler}
                                         error={error.password}
-                                    />
+                                    /> */}
+                                    <div style={{ position: 'relative', width: '100%' }}>
+                                        <InputField
+                                            FormLabel={"Password"}
+                                            FormType={showPassword ? "text" : "password"}
+                                            FormPlaceHolder={"Enter Your Password"}
+                                            name='password'
+                                            value={indata.password}
+                                            onChange={inputHandler}
+                                            error={error.password}
+                                        />
+                                        <span onClick={togglePasswordVisibility} style={{
+                                            position: 'absolute',
+                                            right: '10px',
+                                            top: '38px',
+                                            cursor: 'pointer',
+                                            zIndex: '1'
+                                        }}>
+                                            {showPassword ? <FaEyeSlash /> : <FaEye />}
+                                        </span>
+                                    </div>
                                     <Checkbox name="reminder" value={indata.reminder} onChange={checkHenlder} Checklabel={'"Keep me signed in"'} ID={'custom-check'} />
                                     <SharedButton type={'submit'} BtnLabel={"Continue"} BtnSize={"lg"} BtnClass={"W-100"} BtnVariant={"primary"} style={{
                                         background: '#00285D'

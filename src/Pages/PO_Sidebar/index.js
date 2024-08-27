@@ -6,14 +6,13 @@ import { SharedButton } from '../../components/Button';
 import { CgLogOut } from "react-icons/cg";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from "../../states/AuthContext";
+import { hasPrivilege } from '../../helper/Helper';
 
 export const PoSidebar = () => {
     const navigate = useNavigate();
     const pathname = useLocation().pathname;
-    const [mydata, setMydata] = useState(JSON.parse(localStorage.getItem('userData')));
-    // const profileData = localStorage.getItem("profileData");
-    // const parsedData = JSON.parse(profileData);
     const { setLoggedIn, profileData, setProfileData } = useContext(AuthContext);
+
 
     const logoutClientHandler = () => {
         localStorage.removeItem("authToken");
@@ -21,14 +20,9 @@ export const PoSidebar = () => {
         localStorage.removeItem("loggedIn");
         setLoggedIn(false);
         setProfileData({});
-        // localStorage.setItem("mydata", "");
-        // localStorage.removeItem("mydata");
-        // localStorage.removeItem('id');
-        // localStorage.removeItem('Authorization');
-        // localStorage.removeItem('type');
-        // localStorage.removeItem('userData');
         navigate('/');
     };
+
     return (
         <>
             <div className='CO_Sidebar p-md-4' style={{}}>
@@ -42,40 +36,56 @@ export const PoSidebar = () => {
                         padding: 0
                     }}>
                         <Stack direction='vertical' gap={3}>
-                            <li className={pathname === "/vendorlist" || pathname === "/editvendor" || pathname === "/createvendor" ? 'active' : ""} style={{
-                                padding: '10px'
-                            }}>
-                                <LinkSidebar LinkIcon={<Image src='./assets/images/Vendor.svg' />} LinkLabel={'Vendor'} LinkPath={'/vendorlist'} />
-                            </li>
-                            <li className={pathname === "/departmentlist" || pathname == "/editdepartment" || pathname === "/createdepartment" ? 'active' : ""} style={{
-                                padding: '10px'
-                            }}>
-                                <LinkSidebar LinkIcon={<Image src='./assets/images/Department.svg' />} LinkLabel={'Department'} LinkPath={'/departmentlist'} />
-                            </li>
-                            <li className={pathname === "/employeelist" || pathname === "/editemployee" || pathname === "/createemployee" ? 'active' : ""} style={{
-                                padding: '10px',
-                                position: 'relative'
-                            }}>
-                                <LinkSidebar LinkIcon={<Image src='./assets/images/Employee.svg' />} LinkLabel={'Employee'} LinkPath={'/employeelist'} />
-                            </li>
-                            <li className={pathname === "/joblist" || pathname === "/editjob" || pathname === "/createjob" ? 'active' : ""} style={{
-                                padding: '10px',
-                                position: 'relative'
-                            }}>
-                                <LinkSidebar LinkIcon={<Image src='./assets/images/Job.svg' />} LinkLabel={'Job'} LinkPath={'/joblist'} />
-                            </li>
 
-                            <li className={pathname === "/createrole" || pathname === "/roleList" || pathname === "/rolelistdetail" ? 'active' : ""} style={{
-                                padding: '10px'
-                            }}>
-                                <LinkSidebar LinkIcon={<Image src='./assets/images/Role.svg' />} LinkLabel={'Role'} LinkPath={'/roleList'} />
-                            </li>
+                            {/* Check for Vendor Privilege */}
+                            {hasPrivilege(profileData?.privileges, 'vendormodule', profileData?.user_type) && (
+                                <li className={pathname === "/vendorlist" || pathname === "/editvendor" || pathname === "/createvendor" ? 'active' : ""} style={{ padding: '10px' }}>
+                                    <LinkSidebar LinkIcon={<Image src='./assets/images/Vendor.svg' />} LinkLabel={'Vendor'} LinkPath={'/vendorlist'} />
+                                </li>
+                            )}
 
-                            <li className={pathname === "/timeoffrequestlist" || pathname === "/timerequestedit" ? 'active' : ""} style={{
-                                padding: '10px'
-                            }}>
-                                <LinkSidebar LinkIcon={<Image src='./assets/images/TimeRequest.svg' />} LinkLabel={'Time off Request'} LinkPath={'/timeoffrequestlist'} />
-                            </li>
+                            {/* Check for Department Privilege */}
+                            {hasPrivilege(profileData?.privileges, 'departmentmodule', profileData?.user_type) && (
+                                <li className={pathname === "/departmentlist" || pathname === "/editdepartment" || pathname === "/createdepartment" ? 'active' : ""} style={{ padding: '10px' }}>
+                                    <LinkSidebar LinkIcon={<Image src='./assets/images/Department.svg' />} LinkLabel={'Department'} LinkPath={'/departmentlist'} />
+                                </li>
+                            )}
+
+                            {/* Check for Employee Privilege */}
+                            {hasPrivilege(profileData?.privileges, 'employeemodule', profileData?.user_type) && (
+                                <li className={pathname === "/employeelist" || pathname === "/editemployee" || pathname === "/createemployee" ? 'active' : ""} style={{ padding: '10px', position: 'relative' }}>
+                                    <LinkSidebar LinkIcon={<Image src='./assets/images/Employee.svg' />} LinkLabel={'Employee'} LinkPath={'/employeelist'} />
+                                </li>
+                            )}
+
+                            {/* Check for Job Privilege */}
+                            {hasPrivilege(profileData?.privileges, 'jobmodule', profileData?.user_type) && (
+                                <li className={pathname === "/joblist" || pathname === "/editjob" || pathname === "/createjob" ? 'active' : ""} style={{ padding: '10px', position: 'relative' }}>
+                                    <LinkSidebar LinkIcon={<Image src='./assets/images/Job.svg' />} LinkLabel={'Job'} LinkPath={'/joblist'} />
+                                </li>
+                            )}
+
+                            {/* Check for Role Privilege */}
+                            {hasPrivilege(profileData?.privileges, 'rolemodule', profileData?.user_type) && (
+                                <li className={pathname === "/createrole" || pathname === "/roleList" || pathname === "/rolelistdetail" ? 'active' : ""} style={{ padding: '10px' }}>
+                                    <LinkSidebar LinkIcon={<Image src='./assets/images/Role.svg' />} LinkLabel={'Role'} LinkPath={'/roleList'} />
+                                </li>
+                            )}
+
+                            {/* Check for Time Off Request Privilege */}
+                            {hasPrivilege(profileData?.privileges, 'timeoffrequestmodule', profileData?.user_type) && (
+                                <li className={pathname === "/timeoffrequestlist" || pathname === "/timerequestedit" ? 'active' : ""} style={{ padding: '10px' }}>
+                                    <LinkSidebar LinkIcon={<Image src='./assets/images/TimeRequest.svg' />} LinkLabel={'Time off Request'} LinkPath={'/timeoffrequestlist'} />
+                                </li>
+                            )}
+
+                            {/* Check for Time Card Privilege */}
+                            {/*  {hasPrivilege('timecardmodule') && (
+                                <li className={pathname === "/timecarddetail" || pathname === "/timecard" || pathname === "/subcriptionlistdetail" ? 'active' : ""} style={{ padding: '10px' }}>
+                                    <LinkSidebar LinkIcon={<Image src='./assets/images/Clock.svg' />} LinkLabel={'Time Card'} LinkPath={'/timecard'} />
+                                </li>
+                            )} */}
+
                             {/* <li className={pathname === "/timecarddetail" || pathname === "/timecard" || pathname === "/subcriptionlistdetail" ? 'active' : ""} style={{
                                 padding: '10px'
                             }}>
