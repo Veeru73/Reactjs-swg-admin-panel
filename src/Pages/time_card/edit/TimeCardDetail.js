@@ -51,19 +51,19 @@ export const TimeCardDetail = () => {
                                             minHeight:'100%'
                                         }}>
                                             <Stack direction='horizontal' gap={5}>
-                                                <p>Employee Name</p>
+                                                <h6>Employee Name</h6>
                                                 <p>Hitesh Gard</p>
                                             </Stack>
                                             <Stack direction='horizontal' gap={5}>
-                                                <p>Department Name</p>
+                                                <h6>Department Name</h6>
                                                 <p>Hitesh Gard</p>
                                             </Stack>
                                             <Stack direction='horizontal' gap={5}>
-                                                <p>Email</p>
+                                                <h6>Email</h6>
                                                 <p>Hitesh Gard</p>
                                             </Stack>
                                             <Stack direction='horizontal' gap={5}>
-                                                <p>Phone No</p>
+                                                <h6>Phone No</h6>
                                                 <p>Hitesh Gard</p>
                                             </Stack>
                                         </Stack>

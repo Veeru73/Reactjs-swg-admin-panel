@@ -70,11 +70,11 @@ export const TimeCardList = () => {
                         </Col>
                         <Col md={9}>
                             <Headings MainHeading={"Time Card"} />
-                            {/* <SearchPanel
+                            <SearchPanel
                                 StartIcon={<IoSearch />}
                                 FormPlaceHolder={"Search by Name"}
                                 onChange={searchHandler}
-                            /> */}
+                            />
                             <TimeCardTable
                                 pagination={pagination}
                                 maindata={maindata}
