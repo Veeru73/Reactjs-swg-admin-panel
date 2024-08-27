@@ -80,11 +80,11 @@ export const PoSidebar = () => {
                             )}
 
                             {/* Check for Time Card Privilege */}
-                            {/*  {hasPrivilege('timecardmodule') && (
+                             {/* {hasPrivilege('timecardmodule') && ( */}
                                 <li className={pathname === "/timecarddetail" || pathname === "/timecard" || pathname === "/subcriptionlistdetail" ? 'active' : ""} style={{ padding: '10px' }}>
-                                    <LinkSidebar LinkIcon={<Image src='./assets/images/Clock.svg' />} LinkLabel={'Time Card'} LinkPath={'/timecard'} />
+                                    <LinkSidebar LinkIcon={<Image src='./assets/images/Clock.svg' />} LinkLabel={'Time Card'} LinkPath={'/timecardlist'} />
                                 </li>
-                            )} */}
+                            {/* )} */}
 
                             {/* <li className={pathname === "/timecarddetail" || pathname === "/timecard" || pathname === "/subcriptionlistdetail" ? 'active' : ""} style={{
                                 padding: '10px'

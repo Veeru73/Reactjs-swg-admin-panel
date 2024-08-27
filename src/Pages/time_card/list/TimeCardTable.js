@@ -20,11 +20,10 @@ export const TimeCardTable = ({ pagination, maindata = [], pageHanlder }) => {
         <Table responsive className='table table-hover'>
           <thead>
             <tr>
-              <th>OWNER NAME</th>
-              <th>VENDOR NAME</th>
+              <th>EMPLOYEE NAME</th>
+              <th>DEPARTMENT NAME</th>
               <th>EMAIL</th>
               <th>MOBILE NO</th>
-              <th>ADDRESS</th>
               <th style={{ textAlign: "center" }}>ACTION</th>
             </tr>
           </thead>
@@ -35,7 +34,6 @@ export const TimeCardTable = ({ pagination, maindata = [], pageHanlder }) => {
                 <td>{account.vendor_name}</td>
                 <td>{account.email}</td>
                 <td>{account.phone_number}</td>
-                <td>{account.address}</td>
                 <td>
                   <Button variant="info" size="sm" className="me-2" style={{ color: "#fff", fontWeight: "500" }}
                     onClick={() => handleViewClick(account)}
