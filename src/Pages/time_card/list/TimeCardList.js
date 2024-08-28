@@ -8,7 +8,7 @@ import { Loader } from '../../../components/Loader';
 import { useEffect, useState } from 'react';
 import { IoSearch } from 'react-icons/io5';
 import { ReactComponent as AddIconSvg } from '../../../../src/images/Add.svg';
-import { getVendors } from "../../../services/NetworkCall";
+import { getEmployeesWhoHasTimeCard } from "../../../services/NetworkCall";
 import { SearchPanel } from '../../../components/SearchPanel';
 
 export const TimeCardList = () => {
@@ -18,10 +18,10 @@ export const TimeCardList = () => {
     const [pagination, setPagination] = useState({ totalPages: 1, page: 1 });
     const [searchTerm, setSearchTerm] = useState('');
 
-    const getVendorsList = async (page = 1, search = '') => {
+    const getEmployees = async (page = 1, search = '') => {
         setLoading(true);
 
-        const res = await getVendors(page, search);
+        const res = await getEmployeesWhoHasTimeCard(page, search);
 
         if (res.success) {
             setLoading(false);
@@ -36,7 +36,7 @@ export const TimeCardList = () => {
     };
 
     useEffect(() => {
-        getVendorsList(pagination.page, searchTerm);
+        getEmployees(pagination.page, searchTerm);
     }, [pagination.page, searchTerm]);
 
     const pageHandler = (page) => {
@@ -44,10 +44,6 @@ export const TimeCardList = () => {
             ...prevPagination,
             page: page
         }));
-    };
-
-    const handleCreateAccount = () => {
-        navigate('/createvendor');
     };
 
     const searchHandler = (e) => {

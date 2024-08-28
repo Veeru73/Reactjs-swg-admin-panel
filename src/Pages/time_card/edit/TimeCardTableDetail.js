@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
-import { Table, Button } from 'react-bootstrap';
+import { Table, Button, Badge } from 'react-bootstrap';
 import { TablePagination } from '../../../components/TablePagination';
-import { useNavigate } from 'react-router-dom';
 import { ReactComponent as EyeIconSvg } from '../../../../src/images/Eye.svg';
-import { SearchPanel } from '../../../components/SearchPanel';
-import { IoSearch } from 'react-icons/io5';
-import moment from 'moment';
 
+export const TimeCardTableDetail = ({ pagination, timeCardData = [], pageHanlder, handleStatusChangeButtonClick }) => {
 
-export const TimeCardTableDetail = ({ pagination, maindata = [], pageHanlder }) => {
-
-  const navigate = useNavigate();
-
-  const handleViewClick = (mydata) => { navigate('/editvendor', { state: { data: mydata } }); };
+  // const getStatusBadge = (status) => {
+  //   let badge;
+  //   switch (status) {
+  //     case "APPROVED":
+  //       badge = <Badge className='bg-success p-2'>APPROVED</Badge>;
+  //       break;
+  //     case "REJECTED":
+  //       badge = <Badge className='bg-danger p-2'>REJECTED</Badge>;
+  //       break;
+  //   }
+  //   return badge;
+  // }
 
   return (
     <>
@@ -21,35 +25,39 @@ export const TimeCardTableDetail = ({ pagination, maindata = [], pageHanlder }) 
           <thead>
             <tr>
               <th>JOB NAME</th>
+              <th>WORK ORDER NUMBER</th>
               <th>TASK</th>
               <th>DEFINE</th>
               <th>NOTES</th>
               <th>WORKING HOURS</th>
-              <th style={{ textAlign: "center" }}>ACTION</th>
+              <th>ACTION</th>
             </tr>
           </thead>
           <tbody>
-            {maindata.map((account, index) => (
+            {timeCardData.map((d, index) => (
               <tr key={index}>
-                <td>{account.owner_name}</td>
-                <td>{account.vendor_name}</td>
-                <td>{account.email}</td>
-                <td>{account.phone_number}</td>
-                <td>{account.phone_number}</td>
-                <td>
-                  <Button variant="success" size="sm" className="me-2" style={{ color: "#fff", fontWeight: "500" }}
-                    onClick={() => handleViewClick(account)}
-                  >
-                    {/* <EyeIconSvg /> */}
-                    Approve
-                  </Button>
-                  <Button variant="danger" size="sm" className="me-2" style={{ color: "#fff", fontWeight: "500" }}
-                    onClick={() => handleViewClick(account)}
-                  >
-                    {/* <EyeIconSvg /> */}
-                    Reject
-                  </Button>
-                </td>
+                <td>{d?.job?.job_name}</td>
+                <td>{d?.work_order_number}</td>
+                <td>{d?.task?.task_name}</td>
+                <td>{d?.task_define?.task_define_name}</td>
+                <td>{d?.notes}</td>
+                <td>{`${d?.working_hours} hr ${d?.working_minutes} mins`}</td>
+                <td style={{ color: d?.status == "APPROVED" ? "green" : "red" }}>{d?.status != "AWAITING" ?
+                  d?.status
+                  :
+                  <>
+                    <Button variant="outline-success" size="sm" className="me-2" style={{ fontWeight: "500" }}
+                      onClick={() => handleStatusChangeButtonClick(d.id, "APPROVED")}
+                    >
+                      APPROVE
+                    </Button>
+                    <Button variant="outline-danger" size="sm" className="me-2" style={{ fontWeight: "500" }}
+                      onClick={() => handleStatusChangeButtonClick(d.id, "REJECTED")}
+                    >
+                      REJECT
+                    </Button>
+                  </>
+                }</td>
               </tr>
             ))}
           </tbody>

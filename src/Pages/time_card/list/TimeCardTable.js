@@ -3,9 +3,6 @@ import { Table, Button } from 'react-bootstrap';
 import { TablePagination } from '../../../components/TablePagination';
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as EyeIconSvg } from '../../../../src/images/Eye.svg';
-import { SearchPanel } from '../../../components/SearchPanel';
-import { IoSearch } from 'react-icons/io5';
-import moment from 'moment';
 
 
 export const TimeCardTable = ({ pagination, maindata = [], pageHanlder }) => {
@@ -30,8 +27,8 @@ export const TimeCardTable = ({ pagination, maindata = [], pageHanlder }) => {
           <tbody>
             {maindata.map((account, index) => (
               <tr key={index}>
-                <td>{account.owner_name}</td>
-                <td>{account.vendor_name}</td>
+                <td>{account.first_name} {account.last_name}</td>
+                <td>{account?.department_name}</td>
                 <td>{account.email}</td>
                 <td>{account.phone_number}</td>
                 <td>

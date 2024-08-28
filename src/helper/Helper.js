@@ -37,7 +37,7 @@ export const redirectBasedOnPrivilege = ({ privileges, navigate, userType }) => 
     'employeemodule': '/employeelist',
     'jobmodule': '/joblist',
     'rolemodule': '/roleList',
-    'timecardmodule': '/timecard',
+    'timecardmodule': '/timecardlist',
   };
 
   if (userType == "SUPER_ADMIN") {

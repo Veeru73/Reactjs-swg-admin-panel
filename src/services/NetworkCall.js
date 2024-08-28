@@ -216,6 +216,20 @@ export const updateTimeOffRequestStatus = async (id, data) => {
     return await putRequest(path, data);
 }
 
+export const getEmployeesWhoHasTimeCard = async (page, search) => {
+    const path = `/admin/timecard/getEmployeesWhoHasTimeCards?page=${page}&search=${search}`;
+    return await getRequest(path);
+}
+
+export const getTimeCardByDate = async (page, userId, timeCardDate) => {
+    const path = `/admin/timecard/getTimeCardByDate?page=${page}&userId=${userId}&timeCardDate=${timeCardDate}`;
+    return await getRequest(path);
+}
+
+export const updateTimeCardStatus = async (data) => {
+    const path = `/admin/timecard/updateTimeCardStatus/${data.id}`;
+    return await putRequest(path, data);
+}
 
 
 

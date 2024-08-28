@@ -80,27 +80,11 @@ export const PoSidebar = () => {
                             )}
 
                             {/* Check for Time Card Privilege */}
-                             {/* {hasPrivilege('timecardmodule') && ( */}
-                                <li className={pathname === "/timecarddetail" || pathname === "/timecard" || pathname === "/subcriptionlistdetail" ? 'active' : ""} style={{ padding: '10px' }}>
+                            {hasPrivilege(profileData?.privileges, 'timecardmodule', profileData?.user_type) && (
+                                <li className={pathname === "/timecarddetail" || pathname === "/timecard" ? 'active' : ""} style={{ padding: '10px' }}>
                                     <LinkSidebar LinkIcon={<Image src='./assets/images/Clock.svg' />} LinkLabel={'Time Card'} LinkPath={'/timecardlist'} />
                                 </li>
-                            {/* )} */}
-
-                            {/* <li className={pathname === "/timecarddetail" || pathname === "/timecard" || pathname === "/subcriptionlistdetail" ? 'active' : ""} style={{
-                                padding: '10px'
-                            }}>
-                                <LinkSidebar LinkIcon={<Image src='./assets/images/Clock.svg' />} LinkLabel={'Time Card'} LinkPath={'/timecard'} />
-                            </li>
-                            {/* <li className={pathname === "/inventorymodulelist" || pathname === "/apparatusInfoDetails" || pathname === "/createGeareType" || pathname === "/gearinfo" || pathname === "/CreateGear" || pathname === "/CreateApparatus" || pathname === "/GearListDetail" ? 'active' : ""} style={{
-                                padding: '10px'
-                            }}>
-                                <LinkSidebar LinkIcon={<Image src='./assets/images/notification.svg' />} LinkLabel={'Notifications'} LinkPath={'#'} />
-                            </li>
-                            <li className={pathname === "/unavailability" ? 'active' : ""} style={{
-                                padding: '10px'
-                            }}>
-                                <LinkSidebar LinkIcon={<Image src='./assets/images/Setting.svg' />} LinkLabel={'Settings '} LinkPath={'#'} />
-                            </li> */}
+                            )}
                         </Stack>
                     </ul>
                     <hr />

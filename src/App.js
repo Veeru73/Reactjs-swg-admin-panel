@@ -67,7 +67,7 @@ function App() {
           <Route path="/timeoffrequestdetail" element={<TimeOffRequestDetail />} />
         </Route>
 
-        <Route element={<Auth requiredPrivileges={['timeoffrequestmodule']} />} >
+        <Route element={<Auth requiredPrivileges={['timecardmodule']} />} >
           <Route path="/timecardlist" element={<TimeCardList />} />
           <Route path="/timecarddetail" element={<TimeCardDetail />} />
         </Route>
