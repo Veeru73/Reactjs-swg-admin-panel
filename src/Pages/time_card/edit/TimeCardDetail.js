@@ -98,7 +98,10 @@ export const TimeCardDetail = () => {
                             getTimeCards(pagination.page, location?.state?.data?.id, formattedSelectedDate);
                         }
                     });
+                } else {
+                    errorAlert(res.message);
                 }
+                setLoading(false)
             }
         });
     };
