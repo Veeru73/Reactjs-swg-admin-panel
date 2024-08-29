@@ -36,11 +36,11 @@ export const TimeCardTableDetail = ({ pagination, timeCardData = [], pageHanlder
           <tbody>
             {timeCardData.map((d, index) => (
               <tr key={index}>
-                <td>{d?.job?.job_name}</td>
-                <td>{d?.work_order_number}</td>
+                <td>{d?.job?.job_name || "N/A"}</td>
+                <td>{d?.work_order_number || "N/A"}</td>
                 <td>{d?.task?.task_name}</td>
                 <td>{d?.task_define?.task_define_name}</td>
-                <td>{d?.notes}</td>
+                <td>{d?.notes || "N/A"}</td>
                 <td>{`${d?.working_hours} hr ${d?.working_minutes} mins`}</td>
                 <td style={{ color: d?.status == "APPROVED" ? "green" : "red" }}>{d?.status != "AWAITING" ?
                   d?.status

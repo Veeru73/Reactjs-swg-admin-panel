@@ -29,7 +29,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/" element={<ForgotPassword />} />
+        {/* <Route path="/forgotpassword" element={<ForgotPassword />} /> */}
 
         {/* Protected Routes */}
         <Route element={<Auth requiredPrivileges={['vendormodule']} />} >

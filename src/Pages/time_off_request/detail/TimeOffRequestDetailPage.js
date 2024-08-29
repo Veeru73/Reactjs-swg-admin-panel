@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Container, Row, Form, Button, Badge, Stack } from 'react-bootstrap';
-import { InputField } from '../../../components/InputField';
-import { SharedButton } from '../../../components/Button';
-import { errorAlert, successAlert } from '../../../components/Alert';
+import { Container, Button, Badge, Stack } from 'react-bootstrap';
+import { errorAlert } from '../../../components/Alert';
 import { useNavigate } from 'react-router-dom';
-import { TbEdit } from "react-icons/tb";
-import { RiDeleteBinLine } from "react-icons/ri";
 import Swal from 'sweetalert2';
 import { updateTimeOffRequestStatus } from '../../../services/NetworkCall';
-import { SharedMultiSelect } from '../../../components/SharedMultiSelect';
 import { utcToLocal } from '../../../helper/Helper';
 
 export const TimeOffRequestDetailPage = ({ setLoading, pre }) => {
@@ -28,8 +23,8 @@ export const TimeOffRequestDetailPage = ({ setLoading, pre }) => {
             return;
         }
 
-        const fStatus = status == "APPROVED" ? "approve" : "reject";
-        const sStatus = status == "APPROVED" ? "approved" : "rejected";
+        const fStatus = status === "APPROVED" ? "approve" : "reject";
+        const sStatus = status === "APPROVED" ? "approved" : "rejected";
 
         Swal.fire({
             title: "Are you sure?",
