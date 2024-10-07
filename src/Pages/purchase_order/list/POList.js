@@ -1,27 +1,29 @@
 import { Container, Row, Col } from 'react-bootstrap';
 import { Headings } from '../../../components/Headings';
 import { PoSidebar } from '../../PO_Sidebar';
-import { VendorTable } from './VendorTable';
+import { POTable } from './POTable';
 import { SharedButton } from '../../../components/Button';
 import { useNavigate } from 'react-router-dom';
 import { Loader } from '../../../components/Loader';
 import { useEffect, useState } from 'react';
 import { IoSearch } from 'react-icons/io5';
 import { ReactComponent as AddIconSvg } from '../../../../src/images/Add.svg';
-import { getVendors } from "../../../services/NetworkCall";
+import { getVendors, getPOs } from "../../../services/NetworkCall";
 import { SearchPanel } from '../../../components/SearchPanel';
+import FilterDropdown from '../../../components/FilterDropdown';
 
-export const VendorList = () => {
+export const POList = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [maindata, setMaindata] = useState([]);
     const [pagination, setPagination] = useState({ totalPages: 1, page: 1 });
     const [searchTerm, setSearchTerm] = useState('');
+    const [selectedFilterValue, setSelectedFilterValue] = useState("");
 
     const getVendorsList = async (page = 1, search = '') => {
         setLoading(true);
 
-        const res = await getVendors(page, search);
+        const res = await getPOs(page, selectedFilterValue, search);
 
         if (res.success) {
             setLoading(false);
@@ -37,7 +39,7 @@ export const VendorList = () => {
 
     useEffect(() => {
         getVendorsList(pagination.page, searchTerm);
-    }, [pagination.page, searchTerm]);
+    }, [pagination.page, searchTerm, selectedFilterValue]);
 
     const pageHandler = (page) => {
         setPagination(prevPagination => ({
@@ -46,18 +48,18 @@ export const VendorList = () => {
         }));
     };
 
-    const handleCreateAccount = () => {
-        navigate('/createvendor');
-    };
+    // const handleCreateAccount = () => {
+    //     navigate('/createvendor');
+    // };
 
-    const searchHandler = (e) => {
-        const key = e.target.value;
-        setSearchTerm(key);
-        setPagination(prevPagination => ({
-            ...prevPagination,
-            page: 1
-        }));
-    };
+    // const searchHandler = (e) => {
+    //     const key = e.target.value;
+    //     setSearchTerm(key);
+    //     setPagination(prevPagination => ({
+    //         ...prevPagination,
+    //         page: 1
+    //     }));
+    // };
 
     return (
         <>
@@ -69,8 +71,8 @@ export const VendorList = () => {
                             <PoSidebar />
                         </Col>
                         <Col md={9}>
-                            <Headings MainHeading={"Vendor List"} />
-                            <div className='text-right mb-3'>
+                            <Headings MainHeading={"Purchase Order List"} />
+                            {/* <div className='text-right mb-3'>
                                 <SharedButton
                                     onClick={handleCreateAccount}
                                     BtnLabel={"Create Vendor"}
@@ -78,13 +80,14 @@ export const VendorList = () => {
                                     style={{ background: '#00285D' }}
                                     startIcon={<AddIconSvg />}
                                 />
-                            </div>
-                            <SearchPanel
+                            </div> */}
+                            {/* <SearchPanel
                                 StartIcon={<IoSearch />}
                                 FormPlaceHolder={"Search by Name"}
                                 onChange={searchHandler}
-                            />
-                            <VendorTable
+                            /> */}
+                            <FilterDropdown selectedValue={selectedFilterValue} setSelectedValue={setSelectedFilterValue} pageHandler={pageHandler} />
+                            <POTable
                                 pagination={pagination}
                                 maindata={maindata}
                                 pageHandler={pageHandler}

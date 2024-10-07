@@ -74,7 +74,7 @@ export const TimeCardList = () => {
                             <TimeCardTable
                                 pagination={pagination}
                                 maindata={maindata}
-                                pageHanlder={pageHandler}
+                                pageHandler={pageHandler}
                             />
                         </Col>
                     </Row>

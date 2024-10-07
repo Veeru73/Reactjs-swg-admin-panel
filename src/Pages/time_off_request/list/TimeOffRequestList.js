@@ -39,7 +39,7 @@ export const TimeOffRequestList = () => {
     useEffect(() => { getTimeOffRequestData(pagination.page, searchTerm) }, [pagination.page, searchTerm]);
 
 
-    const pageHanlder = (page) => {
+    const pageHandler = (page) => {
         setPagination(prevPagination => ({
             ...prevPagination,
             page: page
@@ -71,7 +71,7 @@ export const TimeOffRequestList = () => {
                             <TimeOffRequestTable
                                 timeOffRequestData={timeOffRequestData}
                                 pagination={pagination}
-                                pageHanlder={pageHanlder} />
+                                pageHandler={pageHandler} />
                         </Col>
                     </Row>
                 </Container>

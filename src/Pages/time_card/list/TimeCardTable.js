@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { ReactComponent as EyeIconSvg } from '../../../../src/images/Eye.svg';
 
 
-export const TimeCardTable = ({ pagination, maindata = [], pageHanlder }) => {
+export const TimeCardTable = ({ pagination, maindata = [], pageHandler }) => {
 
   const navigate = useNavigate();
 
@@ -43,7 +43,7 @@ export const TimeCardTable = ({ pagination, maindata = [], pageHanlder }) => {
             ))}
           </tbody>
         </Table>
-        <TablePagination pagination={pagination} pageHanlder={pageHanlder} />
+        <TablePagination pagination={pagination} pageHandler={pageHandler} />
       </div>
     </>
   )

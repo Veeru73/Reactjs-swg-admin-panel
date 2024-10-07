@@ -37,7 +37,7 @@ export const DepartmentList = () => {
 
     const handleCreateRole = () => { navigate('/createdepartment'); }
 
-    const pageHanlder = (page) => {
+    const pageHandler = (page) => {
         setPagination(prevPagination => ({
             ...prevPagination,
             page: page
@@ -62,7 +62,7 @@ export const DepartmentList = () => {
                             <DepartmentTable
                                 departmentdata={departmentData}
                                 pagination={pagination}
-                                pageHanlder={pageHanlder} />
+                                pageHandler={pageHandler} />
                         </Col>
                     </Row>
                 </Container>

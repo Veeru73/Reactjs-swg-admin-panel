@@ -8,7 +8,7 @@ import { RiDeleteBinLine } from 'react-icons/ri';
 import { utcToLocalTime } from '../../../helper/Helper';
 
 
-export const EmployeeTable = ({ pagination, maindata = [], pageHanlder, handleDeleteClick }) => {
+export const EmployeeTable = ({ pagination, maindata = [], pageHandler, handleDeleteClick }) => {
   const navigate = useNavigate();
 
   const handleEditClick = (exdata) => {
@@ -61,7 +61,7 @@ export const EmployeeTable = ({ pagination, maindata = [], pageHanlder, handleDe
             ))}
           </tbody>
         </Table>
-        <TablePagination pagination={pagination} pageHanlder={pageHanlder} />
+        <TablePagination pagination={pagination} pageHandler={pageHandler} />
       </div>
     </>
   )

@@ -6,7 +6,7 @@ import {
     utcToLocal
 
 } from '../../../helper/Helper';
-export const TimeOffRequestTable = ({ timeOffRequestData, pagination, pageHanlder }) => {
+export const TimeOffRequestTable = ({ timeOffRequestData, pagination, pageHandler }) => {
     const navigate = useNavigate();
 
     const handleDetailScreenClick = (offrequestfulldata) => {
@@ -61,7 +61,7 @@ export const TimeOffRequestTable = ({ timeOffRequestData, pagination, pageHanlde
                         ))}
                     </tbody>
                 </Table>
-                <TablePagination pagination={pagination} pageHanlder={pageHanlder} />
+                <TablePagination pagination={pagination} pageHandler={pageHandler} />
             </div>
         </>
     )

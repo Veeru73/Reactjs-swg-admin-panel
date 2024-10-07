@@ -4,7 +4,7 @@ import { TablePagination } from '../../components/TablePagination';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { ReactComponent as EyeIconSvg } from '../../../src/images/Eye.svg';
 
-export const RoleTable = ({ rolesdata, pagination, pageHanlder }) => {
+export const RoleTable = ({ rolesdata, pagination, pageHandler }) => {
     const navigate = useNavigate();
 
     const handleDetailScreenClick = (data) => {
@@ -46,7 +46,7 @@ export const RoleTable = ({ rolesdata, pagination, pageHanlder }) => {
                         ))}
                     </tbody>
                 </Table>
-                <TablePagination pagination={pagination} pageHanlder={pageHanlder} />
+                <TablePagination pagination={pagination} pageHandler={pageHandler} />
             </div>
         </>
     )

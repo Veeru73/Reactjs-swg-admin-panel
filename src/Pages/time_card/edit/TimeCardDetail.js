@@ -155,7 +155,7 @@ export const TimeCardDetail = () => {
                                 </Row>
                                 <TimeCardTableDetail
                                     pagination={pagination}
-                                    pageHanlder={pageHandler}
+                                    pageHandler={pageHandler}
                                     timeCardData={timeCardData}
                                     handleStatusChangeButtonClick={handleStatusChangeButtonClick}
                                 />

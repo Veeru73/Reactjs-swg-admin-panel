@@ -59,7 +59,7 @@ export const RoleList = () => {
 
     const handleCreateRole = () => { navigate('/createrole'); }
 
-    const pageHanlder = (page) => {
+    const pageHandler = (page) => {
         setPagination(prevPagination => ({
             ...prevPagination,
             page: page
@@ -81,7 +81,7 @@ export const RoleList = () => {
                             <div className='text-right'>
                                 <SharedButton onClick={handleCreateRole} BtnLabel={"Create Role"} BtnVariant={'light'} style={{ background: '#00285D' }} startIcon={<AddIconSvg />} />
                             </div>
-                            <RoleTable rolesdata={roledata} pagination={pagination} pageHanlder={pageHanlder} />
+                            <RoleTable rolesdata={roledata} pagination={pagination} pageHandler={pageHandler} />
                         </Col>
                     </Row>
                 </Container>

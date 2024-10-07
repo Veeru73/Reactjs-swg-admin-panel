@@ -42,7 +42,7 @@ export const JobList = () => {
     },
         [pagination.page, searchTerm]);
 
-    const pageHanlder = (page) => {
+    const pageHandler = (page) => {
         setPagination(prevPagination => ({
             ...prevPagination,
             page: page
@@ -118,7 +118,7 @@ export const JobList = () => {
                             <JobTable
                                 pagination={pagination}
                                 maindata={maindata}
-                                pageHanlder={pageHanlder}
+                                pageHandler={pageHandler}
                                 handleDeleteClick={handleDeleteClick} />
                         </Col>
                     </Row>

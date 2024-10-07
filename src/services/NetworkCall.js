@@ -231,6 +231,10 @@ export const updateTimeCardStatus = async (data) => {
     return await putRequest(path, data);
 }
 
+export const getPOs = async (page, poType) => {
+    const path = `/admin/PO/getPOs?page=${page}&poType=${poType}`;
+    return await getRequest(path);
+}
 
 
 

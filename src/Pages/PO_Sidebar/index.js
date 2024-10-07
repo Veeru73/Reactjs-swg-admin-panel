@@ -81,8 +81,15 @@ export const PoSidebar = () => {
 
                             {/* Check for Time Card Privilege */}
                             {hasPrivilege(profileData?.privileges, 'timecardmodule', profileData?.user_type) && (
-                                <li className={pathname === "/timecarddetail" || pathname === "/timecard" ? 'active' : ""} style={{ padding: '10px' }}>
+                                <li className={pathname === "/timecarddetail" || pathname === "/timecardlist" ? 'active' : ""} style={{ padding: '10px' }}>
                                     <LinkSidebar LinkIcon={<Image src='./assets/images/Clock.svg' />} LinkLabel={'Time Card'} LinkPath={'/timecardlist'} />
+                                </li>
+                            )}
+
+                            {/* check for Purchase order privilege */}
+                            {hasPrivilege(profileData?.privileges, "purchaseordermodule", profileData?.user_type) && (
+                                <li className={pathname === "/po-detail" || pathname === "/po-list" ? 'active' : ""} style={{ padding: '10px' }}>
+                                    <LinkSidebar LinkIcon={<Image src='./assets/images/po.svg' />} LinkLabel={'Purchase Order'} LinkPath={'/po-list'} />
                                 </li>
                             )}
                         </Stack>

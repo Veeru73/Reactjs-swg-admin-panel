@@ -8,7 +8,7 @@ import { IoSearch } from 'react-icons/io5';
 import moment from 'moment';
 
 
-export const VendorTable = ({ pagination, maindata = [], pageHanlder }) => {
+export const VendorTable = ({ pagination, maindata = [], pageHandler }) => {
 
   const navigate = useNavigate();
 
@@ -48,7 +48,7 @@ export const VendorTable = ({ pagination, maindata = [], pageHanlder }) => {
             ))}
           </tbody>
         </Table>
-        <TablePagination pagination={pagination} pageHanlder={pageHanlder} />
+        <TablePagination pagination={pagination} pageHandler={pageHandler} />
       </div>
     </>
   )

@@ -4,7 +4,7 @@ import { TablePagination } from '../../../components/TablePagination';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { ReactComponent as EyeIconSvg } from '../../../../src/images/Eye.svg';
 
-export const DepartmentTable = ({ departmentdata, pagination, pageHanlder }) => {
+export const DepartmentTable = ({ departmentdata, pagination, pageHandler }) => {
     const navigate = useNavigate();
 
     const handleDetailScreenClick = (departmentFullData) => {
@@ -47,7 +47,7 @@ export const DepartmentTable = ({ departmentdata, pagination, pageHanlder }) => 
                         ))}
                     </tbody>
                 </Table>
-                <TablePagination pagination={pagination} pageHanlder={pageHanlder} />
+                <TablePagination pagination={pagination} pageHandler={pageHandler} />
             </div>
         </>
     )

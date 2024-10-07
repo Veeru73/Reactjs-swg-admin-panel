@@ -22,6 +22,8 @@ import { CreateJob } from './Pages/Job/add/CreateJob';
 import { EditJob } from './Pages/Job/edit/EditJob';
 import { TimeOffRequestList } from './Pages/time_off_request/list/TimeOffRequestList';
 import { TimeOffRequestDetail } from './Pages/time_off_request/detail/TimeOffRequestDetail';
+import { POList } from "./Pages/purchase_order/list/POList";
+import { PODetail } from './Pages/purchase_order/po_detail/PODetail';
 import { Error404 } from './commonpages/Error404';
 
 function App() {
@@ -71,6 +73,9 @@ function App() {
           <Route path="/timecardlist" element={<TimeCardList />} />
           <Route path="/timecarddetail" element={<TimeCardDetail />} />
         </Route>
+
+        <Route path="/po-list" element={<POList />} />
+        <Route path="/po-detail" element={<PODetail />} />
 
         <Route path="*" element={<Error404 />} />
       </Routes >

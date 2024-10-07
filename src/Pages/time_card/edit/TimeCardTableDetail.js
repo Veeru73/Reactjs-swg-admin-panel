@@ -3,7 +3,7 @@ import { Table, Button, Badge } from 'react-bootstrap';
 import { TablePagination } from '../../../components/TablePagination';
 import { ReactComponent as EyeIconSvg } from '../../../../src/images/Eye.svg';
 
-export const TimeCardTableDetail = ({ pagination, timeCardData = [], pageHanlder, handleStatusChangeButtonClick }) => {
+export const TimeCardTableDetail = ({ pagination, timeCardData = [], pageHandler, handleStatusChangeButtonClick }) => {
 
   // const getStatusBadge = (status) => {
   //   let badge;
@@ -62,7 +62,7 @@ export const TimeCardTableDetail = ({ pagination, timeCardData = [], pageHanlder
             ))}
           </tbody>
         </Table>
-        <TablePagination pagination={pagination} pageHanlder={pageHanlder} />
+        <TablePagination pagination={pagination} pageHandler={pageHandler} />
       </div>
     </>
   )

@@ -7,7 +7,7 @@ import { TbEdit } from 'react-icons/tb';
 import { RiDeleteBinLine } from 'react-icons/ri';
 
 
-export const JobTable = ({ pagination, maindata = [], pageHanlder, handleDeleteClick }) => {
+export const JobTable = ({ pagination, maindata = [], pageHandler, handleDeleteClick }) => {
   const navigate = useNavigate();
 
   const handleEditClick = (exdata) => {
@@ -56,7 +56,7 @@ export const JobTable = ({ pagination, maindata = [], pageHanlder, handleDeleteC
             ))}
           </tbody>
         </Table>
-        <TablePagination pagination={pagination} pageHanlder={pageHanlder} />
+        <TablePagination pagination={pagination} pageHandler={pageHandler} />
       </div>
     </>
   )
