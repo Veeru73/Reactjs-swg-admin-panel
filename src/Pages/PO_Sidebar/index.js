@@ -71,6 +71,13 @@ export const PoSidebar = () => {
                                     <LinkSidebar LinkIcon={<Image src='./assets/images/Role.svg' />} LinkLabel={'Role'} LinkPath={'/roleList'} />
                                 </li>
                             )}
+                            
+                            {/* Check for Message */}
+                            {hasPrivilege(profileData?.privileges, 'rolemodule', profileData?.user_type) && (
+                                <li className={pathname === "/createmessage" || pathname === "/sendmessgaetable" ? 'active' : ""} style={{ padding: '10px' }}>
+                                    <LinkSidebar LinkIcon={<Image src='./assets/images/MessageIcon.svg' />} LinkLabel={'Message'} LinkPath={'/createmessage'} />
+                                </li>
+                            )}
 
                             {/* Check for Time Off Request Privilege */}
                             {hasPrivilege(profileData?.privileges, 'timeoffrequestmodule', profileData?.user_type) && (

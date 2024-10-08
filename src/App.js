@@ -25,6 +25,8 @@ import { TimeOffRequestDetail } from './Pages/time_off_request/detail/TimeOffReq
 import { POList } from "./Pages/purchase_order/list/POList";
 import { PODetail } from './Pages/purchase_order/po_detail/PODetail';
 import { Error404 } from './commonpages/Error404';
+import { CreateMessage } from './Pages/Message/CreateMessage';
+import { SendMessage } from './Pages/Message/SendMessage';
 
 function App() {
   return (
@@ -62,6 +64,11 @@ function App() {
           <Route path="/joblist" element={<JobList />} />
           <Route path="/createjob" element={<CreateJob />} />
           <Route path="/editjob" element={<EditJob />} />
+        </Route>
+
+        <Route element={<Auth requiredPrivileges={['message']} />} >
+          <Route path="/createmessage" element={<CreateMessage />} />
+          <Route path="/sendmessage" element={<SendMessage />} />
         </Route>
 
         <Route element={<Auth requiredPrivileges={['timeoffrequestmodule']} />} >
